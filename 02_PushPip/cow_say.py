@@ -9,9 +9,9 @@ OPTIONALS = set("bdgpstwy")
 def main(args):
     if args.l:
         if '/' in args.f:
-            list_cows(args.f)
+            print(list_cows(args.f), file=sys.stdout)
         else:
-            list_cows()
+            print(list_cows(), file=sys.stdout)
     else:
         lines = []
         for line in sys.stdin:
