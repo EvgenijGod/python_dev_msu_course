@@ -3,7 +3,7 @@ import random
 import argparse
 import os
 import urllib.request
-
+from cowsay import cowsay, get_random_cow
 
 def bullscows(guess: str, secret: str) -> (int, int):
     bulls, cows = 0, 0
@@ -21,6 +21,7 @@ def bullscows(guess: str, secret: str) -> (int, int):
 
 
 def ask(prompt: str, valid: list[str] = None) -> str:
+    prompt = cowsay(message = prompt, cow=get_random_cow()) + '\n'
     guess = input(prompt)
     if not valid:
         while guess not in valid:
@@ -29,7 +30,7 @@ def ask(prompt: str, valid: list[str] = None) -> str:
 
 
 def inform(format_string: str, bulls: int, cows: int) -> None:
-    print(format_string.format(bulls, cows))
+    print(cowsay(message = format_string.format(bulls, cows), cow=get_random_cow()) + '\n')
 
 
 def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
@@ -46,7 +47,6 @@ def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
 
 
 if __name__ == '__main__':
-    
     parser = argparse.ArgumentParser(description='cowsay app')
     parser.add_argument('dictionary', type=str, nargs=1,
                     help='allowed words dictionary')
@@ -67,4 +67,4 @@ if __name__ == '__main__':
                 words.append(line)
     
     cnt = gameplay(ask=ask, inform=inform, words=words)
-    print(f"Верно! Вы потратили {cnt} попыток")
+    print(cowsay(message = f"Верно! Вы потратили {cnt} попыток", cow=get_random_cow()) + '\n')
