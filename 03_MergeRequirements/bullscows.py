@@ -21,7 +21,15 @@ def bullscows(guess: str, secret: str) -> (int, int):
 
 
 def ask(prompt: str, valid: list[str] = None) -> str:
-    prompt = cowsay(message = prompt, cow=get_random_cow()) + '\n'
+    prompt = f"""
+    # @==@ {prompt}
+    #        \  
+    #         \   !__!
+    #          \  (*o)\_______
+    #             (__)\ @@@@@@)\/\\
+    #                 ||----w |
+    #                 ||     ||
+    """
     guess = input(prompt)
     if not valid:
         while guess not in valid:
